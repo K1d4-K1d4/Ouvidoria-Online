@@ -11,11 +11,11 @@
     margin: 0;
     padding: 0;
 }
+
 body{
     font-family: Arial, Helvetica, sans-serif;
     background-color: var(--color-white);
     color: var(--color-black);
-
 }
 .img_logo_header{
     width: 45px;
@@ -52,7 +52,6 @@ body{
 .content{
     text-align: center;
     padding-top: 10px;
-    height: 100vh;
     transition: 1s;
 }
 .btn_icon_header{

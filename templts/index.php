@@ -1,74 +1,3 @@
-<?php
-$conexao = mysqli_connect("localhost", "root", "", "");
-if (mysqli_query($conexao, "CREATE DATABASE IF NOT EXISTS banquinho")) {
-    echo 'Banquinho criado<br>';
-    $conexao = mysqli_connect("localhost", "root", "", "banquinho");
-} else {
-    echo "banquinho quebrou<br>";
-}
-
-mysqli_select_db($conexao, "banquinho");
-
-mysqli_query($conexao, 
-    "CREATE TABLE IF NOT EXISTS dados (
-        id INT NOT NULL AUTO_INCREMENT,
-        nome VARCHAR(255),
-        email VARCHAR(255),
-        reclamation VARCHAR(255),
-        PRIMARY KEY (id)
-    )"
-);
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $name = $_POST["name"];
-    $email = $_POST["email"];
-    $reclamation = $_POST["reclamation"];
-
-    $dento = "INSERT INTO dados(nome, email, remedio) 
-                VALUES ('$name', '$email', '$reclamation',)";
-
-    if (mysqli_query($conexao, $dento)) {
-        echo "Deu Certo!";
-    } else {
-        echo "Falhou :(" . mysqli_error($conexao);
-    }
-}
-mysqli_close($conexao);
-?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -101,8 +30,27 @@ mysqli_close($conexao);
             <img src="" class="img_logo_header" alt="Logo">
         </div>
     </div>
-    <div tabindex="0" onclick="closeSidebar()" class="content" id="content">
-        <h1>Página da Ouvidoria</h1>
-    </div>
+
+    
+
+    <fieldset>
+        <legend>Receba</legend>
+        <form action="script.php" method="POST">
+        <label for="name">Nome</label>
+        <input type="text" name="name" id="name">
+        <label for="email">Email</label>
+        <input type="text" name="email" id="email">
+        <label for="reclamation">Desktop</label>
+        <textarea name="reclamation" id="reclamation"></textarea>
+        <label for="options">Ablubleble</label>
+        <select name="options" id="options">
+            <option value="1">Reclamation</option><br>
+            <option value="2">Validation</option><br>
+            <option value="3">Viadation</option>
+            <option value="4">Graduation</option>            
+        </select>
+        <button type="submit">butao :3</button>
+    </form>
+    </fieldset>
 </body>
 </html>
