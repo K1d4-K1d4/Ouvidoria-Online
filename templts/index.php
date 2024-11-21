@@ -35,7 +35,7 @@
 
     <fieldset>
         <legend>Receba</legend>
-        <form action="script.php" method="POST">
+        <form action="../scripts/script.php" method="POST">
         <label for="name">Nome</label>
         <input type="text" name="name" id="name">
         <label for="email">Email</label>

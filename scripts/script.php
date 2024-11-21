@@ -1,11 +1,28 @@
 <?php
-$conexao = mysqli_connect("localhost", "root", "", "");
+$conexao = mysqli_connect("localhost", "root", "");
 
+// Criando o banco de dados "banquinho" se não existir
 if (mysqli_query($conexao, "CREATE DATABASE IF NOT EXISTS banquinho")) {
-    $conexao = mysqli_connect("localhost", "root", "", "banquinho");
+    // Selecionando o banco de dados
+    mysqli_select_db($conexao, "banquinho");
+
+    // Criando a tabela 'dados' se não existir
+    $sql = "CREATE TABLE IF NOT EXISTS dados (
+        id INT NOT NULL AUTO_INCREMENT,
+        nome VARCHAR(255),
+        email VARCHAR(255),
+        reclamacao VARCHAR(255),
+        PRIMARY KEY (id)
+    )";
+
+    if (!mysqli_query($conexao, $sql)) {
+        echo "Erro ao criar a tabela: " . mysqli_error($conexao);
+    }
 } else {
-    echo "banquinho quebrou<br>";
+    echo "Erro ao criar o banco de dados: " . mysqli_error($conexao);
+    exit; // Se não conseguir criar o banco, pare a execução do script
 }
+
 
 mysqli_select_db($conexao, "banquinho");
 
@@ -23,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $reclamation = $_POST["reclamation"];
 
-    $dento = "INSERT INTO dados(nome, email, remedio) 
+    $dento = "INSERT INTO dados(nome, email, reclamation) 
                 VALUES ('$name', '$email', '$reclamation',)";
 
     if (mysqli_query($conexao, $dento)) {
