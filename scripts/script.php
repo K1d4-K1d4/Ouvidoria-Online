@@ -1,56 +1,46 @@
 <?php
-$conexao = mysqli_connect("localhost", "root", "");
-
-// Criando o banco de dados "banquinho" se não existir
-if (mysqli_query($conexao, "CREATE DATABASE IF NOT EXISTS banquinho")) {
-    // Selecionando o banco de dados
-    mysqli_select_db($conexao, "banquinho");
-
-    // Criando a tabela 'dados' se não existir
-    $sql = "CREATE TABLE IF NOT EXISTS dados (
-        id INT NOT NULL AUTO_INCREMENT,
-        nome VARCHAR(255),
-        email VARCHAR(255),
-        reclamacao VARCHAR(255),
-        PRIMARY KEY (id)
-    )";
-
-    if (!mysqli_query($conexao, $sql)) {
-        echo "Erro ao criar a tabela: " . mysqli_error($conexao);
-    }
-} else {
-    echo "Erro ao criar o banco de dados: " . mysqli_error($conexao);
-    exit; // Se não conseguir criar o banco, pare a execução do script
+$conexao = mysqli_connect("localhost", "root", "", "");
+if (!$conexao) {
+    die("Erro :( " . mysqli_connect_error());
 }
 
+if (mysqli_query($conexao, "CREATE DATABASE IF NOT EXISTS banquinho")) {
+    echo 'Banco de dados "banquinho" criado com sucesso.<br>';
+    $conexao = mysqli_connect("localhost", "root", "", "banquinho");
+    if (!$conexao) {
+        die("Falha na conexão com o banco de dados: " . mysqli_connect_error());
+    }
 
-mysqli_select_db($conexao, "banquinho");
-
-mysqli_query($conexao, 
-    "CREATE TABLE IF NOT EXISTS dados (
+$sql = "
+    CREATE TABLE IF NOT EXISTS dados (
         id INT NOT NULL AUTO_INCREMENT,
         nome VARCHAR(255),
         email VARCHAR(255),
         reclamation VARCHAR(255),
+        opcao INT,
         PRIMARY KEY (id)
-    )"
-);
+    )
+";
+if (!mysqli_query($conexao, $sql)) {
+    die("Erro ao criar tabela: " . mysqli_error($conexao));
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $email = $_POST["email"];
     $reclamation = $_POST["reclamation"];
+    $opcao = (int) $_POST["opcao"];
 
-    $dento = "INSERT INTO dados(nome, email, reclamation) 
-                VALUES ('$name', '$email', '$reclamation',)";
-
-    if (mysqli_query($conexao, $dento)) {
-        echo "Deu Certo!";
+    $sql = "
+        INSERT INTO dados (nome, email, reclamation, opcao) 
+        VALUES ('$name', '$email', '$reclamation', $opcao)
+    ";
+    if (mysqli_query($conexao, $sql)) {
+        echo "Dados inseridos com sucesso!";
     } else {
-        echo "Falhou :(" . mysqli_error($conexao);
+        echo "Erro :( " . mysqli_error($conexao);
     }
+}
 }
 mysqli_close($conexao);
 ?>
-
-
-
