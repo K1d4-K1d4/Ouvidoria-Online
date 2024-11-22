@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ouvidoria Online | bom dia Aqui!</title>
     <link rel="stylesheet" href="../statics/style.css">
-    <script src="../templts/script.js" defer></script>
+    <script src="../scripts/script.js" defer></script>
 </head>
 <body>
     <div class="header" id="header">

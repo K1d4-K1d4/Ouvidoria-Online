@@ -3,7 +3,9 @@ $conexao = mysqli_connect("localhost", "root", "", "");
 if (!$conexao) {
     die("Erro :( " . mysqli_connect_error());
 }
-
+/*
+    ECHO NAO NECESSARIO, CODIGO APENAS PARA PROCESSAMENTO DE DADOS, DEVE ENVIAR O CLIENTE PARA A PRÓXIMA PÁGINA ANTES DE APARECER
+*/
 if (mysqli_query($conexao, "CREATE DATABASE IF NOT EXISTS banquinho")) {
     echo 'Banco de dados "banquinho" criado com sucesso.<br>';
     $conexao = mysqli_connect("localhost", "root", "", "banquinho");
