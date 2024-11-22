@@ -12,7 +12,7 @@
 
 <header>
     <nav>
-        <a href>HOME</a>
+        <a href="login.php">login</a>
         <a href>HOME</a>
         <a href>HOME</a>
         <a href>HOME</a>
@@ -21,9 +21,9 @@
     </nav>
 </header>
 
-    <fieldset>
+    <fieldset style="margin: 10px;">
         <legend>Receba</legend>
-        <form action="../scripts/script.php" method="POST">
+        <form action="../scripts/dados.php" method="POST" >
             <label for="name">Nome</label>
             <input type="text" name="name" id="name" required>
             <label for="email">Email</label>
@@ -36,6 +36,14 @@
                 <option value="2">Validation</option>
                 <option value="3">Viadation</option>
                 <option value="4">Graduation</option>
+            </select>
+
+            <label for="situacao">Situação</label>
+            <select name="situacao" id="situacao">
+                <option value="1">Pendente</option>
+                <option value="2">Não Resolvido</option>
+                <option value="3">Parcialmente Resolvido</option>
+                <option value="4">Resolvido</option>
             </select>
             <br>
             <button type="submit">Botão :3</button>
