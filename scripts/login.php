@@ -5,7 +5,6 @@ if (!$conexao) {
 }
 
 if (mysqli_query($conexao, "CREATE DATABASE IF NOT EXISTS banquinho")) {
-    // Não precisa dessa verificação aqui, ela está fora de lugar
     $conexao = mysqli_connect("localhost", "root", "", "banquinho");
     if (!$conexao) {
         die("Erro ao conectar ao banco de dados 'banquinho': " . mysqli_connect_error());
