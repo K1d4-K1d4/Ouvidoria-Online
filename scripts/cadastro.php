@@ -17,7 +17,7 @@ $login = "CREATE TABLE IF NOT EXISTS cadastro
         nome VARCHAR(255),
         email VARCHAR(255),
         senha VARCHAR(255),
-        cpf VARCHAR(255),
+        cpf VARCHAR(255), #precisa n :)
         PRIMARY KEY (id)
     )
 ";

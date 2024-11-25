@@ -1,24 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="../statics/style.css">
-    <script src="../scripts/script.js" defer></script>
+    <link rel="stylesheet" href="../statics/login.css">
+    <title>Login</title>
 </head>
-<body style="padding: 20px;">
-        <form action="../scripts/login.php" method="POST">
-        <label for="name">Nome</label>
-        <input type="text" name="name" id="name" required>
-        <label for="CPF">CPF</label>
-        <input type="text" name="cpf" id="cpf">
-        <label for="email">Email</label>
-        <input type="email" name="email" id="email" required>
-        <label for="senha">Senha</label>
-        <input type="password" name="senha" id="senha">
-        <button type="submit">Botão :3</button>
-    </form>
+
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2>Login</h2>
+            <form method="post" action="../scripts/cadastro.php">
+                <label for="email">E-mail ou CPF:</label>
+                <input type="text" id="email" name="email" required>
+
+                <label for="password">Senha:</label>
+                <input type="password" id="senha" name="senha" required>
+
+                <div class="login-options">
+                    <label for="remember-me">
+                        <input type="checkbox" id="remember-me" name="remember-me">
+                        Lembrar-me
+                    </label>
+
+                    <a href="#" class="forgot-password">Esqueceu a senha?</a>
+                </div>
+
+                <button type="submit" id="login">Entrar</button>
+            </form>
+
+        </div>
+    </div>
+
+    <script src="../scripts/login.js"></script>
+
     <?php 
     
     ?>
