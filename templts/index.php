@@ -1,7 +1,4 @@
-<!DOCTYPE html>
 <html lang="pt-BR">
-    <?php
-    ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,17 +10,21 @@
 <body>
 
 <header>
+
     <nav>
-        <a href="login.php">login</a>
+
+        <a href><img src="https://fundacao193.org.br/wp-content/uploads/2023/05/ouvidoria.png"></a>
         <a href>HOME</a>
         <a href>HOME</a>
-        <a href>HOME</a>
-        <a href>HOME</a>
+        <a href>ENTRAR</a>
+        <a href="login.php">CADASTRAR</a>
 
     </nav>
 </header>
 
-    <fieldset style="margin: 10px;">
+<div class="interface">
+
+    <fieldset class="">
         <legend>Receba</legend>
         <form action="../scripts/dados.php" method="POST" >
             <label for="name">Nome</label>
@@ -47,9 +48,9 @@
                 <option value="3">Parcialmente Resolvido</option>
                 <option value="4">Resolvido</option>
             </select>
-            <br>
             <button type="submit">Botão :3</button>
         </form>
     </fieldset>
+</div>
 </body>
 </html>
