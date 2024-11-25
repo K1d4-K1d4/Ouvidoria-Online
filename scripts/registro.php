@@ -26,10 +26,11 @@ if (!mysqli_query($conexao, $login)) {
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $name = $_POST["name"];
     $email = $_POST["email"];
     $senha = $_POST["senha"];
     $cadastro = "INSERT INTO cadastro (nome, email, senha) 
-                VALUES ( '$email','$senha')";
+                VALUES ('$name', '$email','$senha')";
 
     if (!mysqli_query($conexao, $cadastro)) {
         die("Erro ao inserir dados: " . mysqli_error($conexao));

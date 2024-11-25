@@ -49,9 +49,11 @@ button {
     color: white;
     padding: 10px 20px;
     border: none;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
     transition: background-color 0.3s;
+    margin-top: auto;
+
 }
 
 button:hover {
@@ -76,15 +78,4 @@ button:hover {
 .login-options a {
     color: #333;
     text-decoration: none;
-}
-
-.login-admin {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.login-admin a {
-    color: #ce2b2b;
-    text-decoration: none;
-    font-weight: bold;
 }

@@ -1,56 +1,85 @@
+<!DOCTYPE html>
 <html lang="pt-BR">
+<?php
+session_start(); 
+
+$conexao = mysqli_connect("localhost", "root", "", "banquinho");
+if (!$conexao) {
+    die("Erro :( " . mysqli_connect_error());
+}
+
+$aut = false;
+
+if (isset($_SESSION['usuario_login'])) {
+    $aut = true;
+}
+?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ouvidoria Online</title>
-    <link rel="stylesheet" href="../statics/style.css">
     <script src="../scripts/script.js" defer></script>
+    <link rel="stylesheet" href="../statics/style.css">
 </head>
-
 <body>
-
 <header>
-
     <nav>
-
-        <a href><img src="https://fundacao193.org.br/wp-content/uploads/2023/05/ouvidoria.png"></a>
-        <a href>HOME</a>
-        <a href>HOME</a>
-        <a href>ENTRAR</a>
-        <a href="login.php">CADASTRAR</a>
-
+        <a href="#" class="nav-logo">
+            <img src="https://fundacao193.org.br/wp-content/uploads/2023/05/ouvidoria.png" alt="Ouvidoria">
+        </a>
+        <div class="nav-links">
+            <a href="#">HOME</a>
+            <a href="#">SOBRE</a>
+            <?php if (!$aut): ?>
+                <a href="login.php">ENTRAR</a>
+                <a href="register.php">CADASTRAR</a>
+            <?php 
+            else: 
+            ?>
+            <div class="welcome-box">
+            Bem-vindo, <strong><?php echo htmlspecialchars($_SESSION['usuario_id']); ?></strong>!
+            </div>
+            <?php
+            endif; 
+            ?>
+        </div>
     </nav>
 </header>
 
-<div class="interface">
+<main>
+    <div class="interface">
+        <fieldset>
+            <legend>Receba</legend>
+            <form action="../scripts/dados.php" method="POST">
+                <label for="name">Nome</label>
+                <input type="text" name="name" id="name" required>
 
-    <fieldset class="">
-        <legend>Receba</legend>
-        <form action="../scripts/dados.php" method="POST" >
-            <label for="name">Nome</label>
-            <input type="text" name="name" id="name" required>
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" required>
-            <label for="reclamation">Desktop</label>
-            <textarea name="reclamation" id="reclamation" required></textarea>
-            <label for="opcao">Ablubleble</label>
-            <select name="opcao" id="opcao">
-                <option value="1">Reclamation</option>
-                <option value="2">Validation</option>
-                <option value="3">Viadation</option>
-                <option value="4">Graduation</option>
-            </select>
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" required>
 
-            <label for="situacao">Situação</label>
-            <select name="situacao" id="situacao">
-                <option value="1">Pendente</option>
-                <option value="2">Não Resolvido</option>
-                <option value="3">Parcialmente Resolvido</option>
-                <option value="4">Resolvido</option>
-            </select>
-            <button type="submit">Botão :3</button>
-        </form>
-    </fieldset>
-</div>
+                <label for="reclamation">Reclamação</label>
+                <textarea name="reclamation" id="reclamation" required></textarea>
+
+                <label for="opcao">Opção</label>
+                <select name="opcao" id="opcao">
+                    <option value="1">Reclamação</option>
+                    <option value="2">Validação</option>
+                    <option value="3">Viadation</option>
+                    <option value="4">Graduação</option>
+                </select>
+
+                <label for="situacao">Situação</label>
+                <select name="situacao" id="situacao">
+                    <option value="1">Pendente</option>
+                    <option value="2">Não Resolvido</option>
+                    <option value="3">Parcialmente Resolvido</option>
+                    <option value="4">Resolvido</option>
+                </select>
+
+                <button type="submit">Enviar</button>
+            </form>
+        </fieldset>
+    </div>
+</main>
 </body>
 </html>
