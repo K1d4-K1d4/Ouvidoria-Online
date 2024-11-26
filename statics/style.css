@@ -1,18 +1,16 @@
-/* General Reset */
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body Styling */
 body {
     background-color: cadetblue;
     font-family: Arial, sans-serif;
     color: white;
 }
 
-/* Header */
 header {
     background-color: rgb(187, 219, 219);
     position: sticky;
@@ -22,7 +20,7 @@ header {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Navigation Bar */
+
 header nav {
     display: flex;
     justify-content: space-between;
@@ -71,7 +69,6 @@ header nav {
     font-weight: bold;
 }
 
-/* Main Content */
 main .interface {
     max-width: 800px;
     margin: 20px auto;
@@ -82,7 +79,6 @@ main .interface {
     color: white;
 }
 
-/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
