@@ -17,7 +17,6 @@ $login = "CREATE TABLE IF NOT EXISTS cadastro
         nome VARCHAR(255),
         email VARCHAR(255),
         senha VARCHAR(255),
-        cpf VARCHAR(255),
         PRIMARY KEY (id)
     )
 ";
@@ -30,9 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $email = $_POST["email"];
     $senha = $_POST["senha"];
-    $cpf = $_POST["cpf"];
-    $cadastro = "INSERT INTO cadastro (nome, email, senha, cpf) 
-                VALUES ('$name', '$email','$senha','$cpf')";
+    $cadastro = "INSERT INTO cadastro (nome, email, senha) 
+                VALUES ('$name', '$email','$senha')";
 
     if (!mysqli_query($conexao, $cadastro)) {
         die("Erro ao inserir dados: " . mysqli_error($conexao));
