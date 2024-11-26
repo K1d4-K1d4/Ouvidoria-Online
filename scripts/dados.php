@@ -6,26 +6,15 @@ if (!isset($_SESSION['usuario_login'])) {
     exit();
 }
 
-$conexao = mysqli_connect("localhost", "root", "", "");
-if (!$conexao) {
-    die("Erro :( " . mysqli_connect_error());
-}
-
-if (mysqli_query($conexao, "CREATE DATABASE IF NOT EXISTS banquinho")) {
-    if (!$conexao){
-        die("Falha na conexão com o banco de dados: " . mysqli_connect_error());
-    }
-}
-
 $conexao = mysqli_connect("localhost", "root", "", "banquinho");
 if (!$conexao) {
-    die("Erro ao conectar ao banco de dados 'banquinho': " . mysqli_connect_error());
+    die("Erro :( " . mysqli_connect_error());
 }
 
 $sql = "CREATE TABLE IF NOT EXISTS dados 
     (
         id INT NOT NULL AUTO_INCREMENT,
-        nome VARCHAR (255),
+        nome VARCHAR(255),
         reclamation VARCHAR(255),
         opcao INT,
         situacao INT,
@@ -41,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reclamation = $_POST["reclamation"];
     $opcao = (int) $_POST["opcao"];
     $situacao = (int) $_POST["situacao"];
-    $usuario_nome = $_SESSION['usuario_login'];
+    $usuario_nome = $_SESSION['usuario_nome'];
 
     $sql = "INSERT INTO dados (nome, reclamation, opcao, situacao) 
             VALUES ('$usuario_nome', '$reclamation', '$opcao', '$situacao')";
@@ -49,6 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (!mysqli_query($conexao, $sql)) {
         die("Erro ao inserir dados: " . mysqli_error($conexao));
     }
+
+    header("Location: ../templts/index.php");
+    exit();
 }
 
 mysqli_close($conexao);
