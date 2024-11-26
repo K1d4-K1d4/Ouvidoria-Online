@@ -1,52 +1,58 @@
+<?php
+// Inicia a sessão para salvar informações do usuário logado
+session_start();
 
+// Conexão com o banco de dados
+$conexao = mysqli_connect("localhost", "root", "", "banquinho");
+if (!$conexao) {
+    die("Erro :( " . mysqli_connect_error());
+}
+
+// Variável para exibir mensagens de erro no formulário
+$erro = '';
+
+// Verifica se o formulário foi enviado
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Obtém e escapa os dados enviados no formulário
+    $login = mysqli_real_escape_string($conexao, $_POST['email']);
+    $senha = $_POST['senha'];
+
+    // Consulta o usuário pelo email
+    $sql = "SELECT * FROM cadastro WHERE email = '$login'";
+    $resultado = mysqli_query($conexao, $sql);
+
+    if ($resultado && mysqli_num_rows($resultado) == 1) {
+        // Obtém os dados do usuário
+        $usuario = mysqli_fetch_assoc($resultado);
+
+        // Verifica se a senha está correta
+        if (password_verify($senha, $usuario['senha'])) {
+            // Armazena as informações do usuário na sessão
+            $_SESSION['usuario_id'] = $usuario['id'];
+            $_SESSION['usuario_nome'] = $usuario['nome'];
+            $_SESSION['usuario_email'] = $usuario['email'];
+            $_SESSION['usuario_login'] = $usuario['email'];
+
+            // Redireciona para a página inicial
+            header("Location: ../templts/index.php");
+            exit;
+        } else {
+            $erro = "Senha incorreta.";
+        }
+    } else {
+        $erro = "Usuário não encontrado.";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../statics/login.css">
     <title>Login</title>
 </head>
-<?php
-$erro='';
-$conexao = mysqli_connect("localhost", "root", "", "");
-if (!$conexao) {
-    die("Erro :( " . mysqli_connect_error());
-}
-
-if (mysqli_query($conexao, "CREATE DATABASE IF NOT EXISTS banquinho")) {
-    $conexao = mysqli_connect("localhost", "root", "", "banquinho");
-    if (!$conexao) {
-        die("Erro ao conectar ao banco de dados 'banquinho': " . mysqli_connect_error());
-    }
-}
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-    $login = $_POST['email'];
-    $senha = $_POST['senha'];
-
-
-$sql = "SELECT * FROM cadastro WHERE email = '$login'";
-$resultado = mysqli_query($conexao, $sql);
-
-if (mysqli_num_rows($resultado) == 1) {
-  $usuario = mysqli_fetch_assoc($resultado);
-
-  (password_verify($senha, $email['senha']));
-
-    $_SESSION['usuario_id'] = $email['id'];
-    $_SESSION['usuario_login'] = $email['email'];
-
-    // Redireciona para a página principal (index.php)
-    header("Location: ../templts/index.php");
-    exit;  // Para garantir que o código abaixo não seja executado
-  
- 
-} else {
-  // Usuário não encontrado
-  $erro = "E-mail ou senha incorretos.";
-}
-}
-
-?>
 <body>
     <div class="container">
         <div class="login-box">
@@ -59,37 +65,23 @@ if (mysqli_num_rows($resultado) == 1) {
                 <input type="password" id="senha" name="senha" required>
 
                 <div class="login-options">
-                    <label for="remember-me">
-                        <input type="checkbox" id="remember-me" name="remember-me">
+                    <label>
+                        <input type="checkbox" id="lembrar" name="lembrar">
                         Lembrar-me
                     </label>
-
-                    <a href="#" class="forgot-password">Esqueceu a senha?</a>
-                    <a href="../templts/registro.php" class="forgot-password">Cadastrar-se</a>
+                    <a href="#" class="esqueci">Esqueceu a senha?</a>
+                    <a href="../templts/registro.php" class="esqueci">Cadastrar-se</a>
                 </div>
-                <?php if ($erro): ?>
-            <p style="color: red; aligm-itens: center;"><?php echo $erro; ?></p>
-            <?php endif; ?>
+
+                <!-- Mensagem de erro -->
+                <?php if (!empty($erro)): ?>
+                    <p style="color: red; text-align: center;"><?php echo htmlspecialchars($erro); ?></p>
+                <?php endif; ?>
 
                 <button type="submit" id="login">Entrar</button>
             </form>
-            <?php
-    if (isset($_SESSION['erro'])) {
-    if ($_SESSION['erro'] == 1) {
-      echo "<p>Usuário ou senha inválidos.</p>";
-    } elseif ($_SESSION['erro'] == 2) {
-      echo "<p>Por favor, faça login para acessar o conteúdo.</p>";
-    } else {
-      echo "<p>Erro desconhecido.</p>";
-    }
-  }
-  ?>
-
         </div>
     </div>
-
-    <?php 
-    
-    ?>
 </body>
 </html>
+

@@ -8,11 +8,7 @@ if (!$conexao) {
     die("Erro :( " . mysqli_connect_error());
 }
 
-$aut = false;
-
-if (isset($_SESSION['usuario_login'])) {
-    $aut = true;
-}
+$aut = isset($_SESSION['usuario_login']);
 ?>
 <head>
     <meta charset="UTF-8">
@@ -33,15 +29,13 @@ if (isset($_SESSION['usuario_login'])) {
             <?php if (!$aut): ?>
                 <a href="login.php">ENTRAR</a>
                 <a href="register.php">CADASTRAR</a>
-            <?php 
-            else: 
-            ?>
+            <?php else: ?>
             <div class="welcome-box">
-            Bem-vindo, <strong><?php echo htmlspecialchars($_SESSION['usuario_id']); ?></strong>!
+                Bem-vindo, <strong><?php echo htmlspecialchars($_SESSION['usuario_nome']); ?></strong>! <br>
+                Email: <strong><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></strong><br>
+                ID: <strong><?php echo htmlspecialchars($_SESSION['usuario_id']); ?></strong>
             </div>
-            <?php
-            endif; 
-            ?>
+            <?php endif; ?>
         </div>
     </nav>
 </header>
@@ -51,11 +45,6 @@ if (isset($_SESSION['usuario_login'])) {
         <fieldset>
             <legend>Receba</legend>
             <form action="../scripts/dados.php" method="POST">
-                <label for="name">Nome</label>
-                <input type="text" name="name" id="name" required>
-
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" required>
 
                 <label for="reclamation">Reclamação</label>
                 <textarea name="reclamation" id="reclamation" required></textarea>
@@ -65,7 +54,7 @@ if (isset($_SESSION['usuario_login'])) {
                     <option value="1">Reclamação</option>
                     <option value="2">Validação</option>
                     <option value="3">Viadation</option>
-                    <option value="4">Graduação</option>
+                    <option value="4">Graduation</option>
                 </select>
 
                 <label for="situacao">Situação</label>
