@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="checkbox" id="lembrar" name="lembrar">
                         Lembrar-me
                     </label>
-                    <a href="#" class="esqueci">Esqueceu a senha?</a>
+                    <a href="../templts/login.php" class="esqueci">Esqueceu a senha?</a>
                     <a href="../templts/registro.php" class="esqueci">Cadastrar-se</a>
                 </div>
 

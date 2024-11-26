@@ -24,10 +24,9 @@ $aut = isset($_SESSION['usuario_login']);
             <img src="https://fundacao193.org.br/wp-content/uploads/2023/05/ouvidoria.png" alt="Ouvidoria">
         </a>
         <div class="nav-links">
-            <a href="#">HOME</a>
-            <a href="#">SOBRE</a>
+            <a href="../templts/reclamaçoes.php">RECLAMAÇOES</a>
             <?php if (!$aut): ?>
-                <a href="login.php">ENTRAR</a>
+                <a href="../templts/login.php">ENTRAR</a>
                 <a href="register.php">CADASTRAR</a>
             <?php else: ?>
             <div class="welcome-box">
@@ -35,18 +34,23 @@ $aut = isset($_SESSION['usuario_login']);
                 Email: <strong><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></strong><br>
                 ID: <strong><?php echo htmlspecialchars($_SESSION['usuario_id']); ?></strong>
             </div>
+            <div class="nav-links">
+            <a href="../templts/logout.php">Sair</a>
+            </div>
             <?php endif; ?>
+            
         </div>
+        
     </nav>
 </header>
 
 <main>
     <div class="interface">
         <fieldset>
-            <legend>Receba</legend>
+            <legend></legend>
             <form action="../scripts/dados.php" method="POST">
 
-                <label for="reclamation">Reclamação</label>
+                <label for="reclamation">Diga-nos Sua mensagem</label>
                 <textarea name="reclamation" id="reclamation" required></textarea>
 
                 <label for="opcao">Opção</label>
