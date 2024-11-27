@@ -21,6 +21,8 @@ $tableExists = mysqli_query($conexao, $sqlCheckTable);
 if (mysqli_num_rows($tableExists) > 0) {
     // Se a tabela existir, buscar os dados
     $sql = "SELECT * FROM dados";
+    $sql = "SELECT * FROM dados ORDER BY id DESC";
+
     $resultado = mysqli_query($conexao, $sql);
 
     if (!$resultado) {
@@ -43,7 +45,7 @@ if (mysqli_num_rows($tableExists) > 0) {
     <header>
         <nav>
             <a href="#" class="nav-logo">
-                <img src="https://fundacao193.org.br/wp-content/uploads/2023/05/ouvidoria.png" alt="Ouvidoria">
+                <img src="/Ouvidoria-Online/statics/ouvidoria.png" alt="Ouvidoria">
             </a>
             <div class="nav-links">
                 <a href="../templts/reclamaçoes.php">RECLAMAÇÕES</a>
@@ -54,7 +56,6 @@ if (mysqli_num_rows($tableExists) > 0) {
                     <div class="welcome-box">
                         Bem-vindo, <strong><?php echo htmlspecialchars($_SESSION['usuario_nome']); ?></strong>! <br>
                         Email: <strong><?php echo htmlspecialchars($_SESSION['usuario_email']); ?></strong><br>
-                        ID: <strong><?php echo htmlspecialchars($_SESSION['usuario_id']); ?></strong>
                     </div>
                     <div class="nav-links">
                         <a href="../templts/logout.php">Sair</a>
@@ -65,13 +66,14 @@ if (mysqli_num_rows($tableExists) > 0) {
     </header>
 
     <main>
-
         <div class="messages-container">
             <h2>Reclamações Enviadas</h2>
             <?php if ($resultado && mysqli_num_rows($resultado) > 0): ?>
                 <?php while ($row = mysqli_fetch_assoc($resultado)): ?>
-                    <div class="message">
 
+
+                    <div class="message">
+  
                         <div class="situacao">
                             <p><strong><ins>Opção:</ins></strong>
                                 <?php
@@ -80,13 +82,13 @@ if (mysqli_num_rows($tableExists) > 0) {
                                         echo 'Reclamação';
                                         break;
                                     case 2:
-                                        echo 'Validação';
+                                        echo 'Elogio';
                                         break;
                                     case 3:
-                                        echo 'Viadation';
+                                        echo 'Sugestão';
                                         break;
                                     case 4:
-                                        echo 'Graduation';
+                                        echo 'Denuncia';
                                         break;
                                     default:
                                         echo 'Não especificado';
@@ -116,7 +118,8 @@ if (mysqli_num_rows($tableExists) > 0) {
                                 ?>
                             </p>
                         </div>
-                        <p><strong>Reclamação:</strong> <?php echo htmlspecialchars($row['reclamation']); ?></p>
+                        <p><strong> <ins><?php echo htmlspecialchars($row['nome']); ?></ins>:
+                            </strong><?php echo htmlspecialchars($row['reclamation']); ?></p>
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>
@@ -126,17 +129,14 @@ if (mysqli_num_rows($tableExists) > 0) {
         </div>
 
         <div class="interface">
-
             <form class="mandar" action="../scripts/dados.php" method="POST">
-
                 <div class="container2">
-
                     <label for="opcao">Opção</label>
                     <select class="op" name="opcao" id="opcao">
                         <option value="1">Reclamação</option>
-                        <option value="2">Validação</option>
-                        <option value="3">Viadation</option>
-                        <option value="4">Graduation</option>
+                        <option value="2">Elogio</option>
+                        <option value="3">Sugestão</option>
+                        <option value="4">Denuncia</option>
                     </select>
 
                     <label for="situacao">Situação</label>
@@ -146,16 +146,19 @@ if (mysqli_num_rows($tableExists) > 0) {
                         <option value="3">Parcialmente Resolvido</option>
                         <option value="4">Resolvido</option>
                     </select>
-
                 </div>
 
                 <label for="reclamation">Diga-nos sua mensagem</label>
                 <textarea name="reclamation" id="reclamation" required></textarea>
 
+                <!-- Checkbox para envio anônimo -->
+                <div>
+                    <input type="checkbox" name="anonimo" id="anonimo">
+                    <label for="anonimo">Enviar como anônimo</label>
+                </div>
 
                 <button type="submit">Enviar</button>
             </form>
-
         </div>
     </main>
 </body>

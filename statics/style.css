@@ -25,9 +25,10 @@ header nav {
     align-items: center;
 }
 
-.nav-logo img {
-    width: 60px;
+.nav-logo img{
+    width: 80px;
     height: auto;
+    margin-left: 190%;
 }
 
 .nav-links {
@@ -93,8 +94,11 @@ textarea{
     color: white;
 }
 .op{
-    width: 35%;
+    width: 30%;
     font-size: 10px;
+    font-family: Arial, sans-serif;
+    color: #0A8282  ;
+    font-weight: bold;
 }
 
 .messages-container {
@@ -104,6 +108,7 @@ textarea{
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-height: 680px;
 }
 .message{
     background-color: #014D54  ;
@@ -111,9 +116,11 @@ textarea{
     padding: 5px;
     margin-top: 1%;
 
+
 }
 .situacao{
     display: flex;
+    margin-bottom: 5px;
 
 }
 
@@ -124,7 +131,7 @@ form {
 }
 
 form label {
-    font-weight: bold;
+    font-weight: bold;  
     margin-bottom: 10px;
 }
 
@@ -136,16 +143,18 @@ form select {
 }
 
 form button {
-    background-color: #4caf50;
+    background-color: #0A8282 ;
     color: white;
     padding: 10px;
     border-radius: 5px;
     font-weight: bold;
     cursor: pointer;
+    border: 0cap;
 }
 
 form button:hover {
-    background-color: #2d742f;
+    background-color: #014D54;
+    transition: 0.2s;
 }
 
 table {

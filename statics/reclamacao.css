@@ -22,7 +22,12 @@ nav a {
     padding: 20px;
     background-color: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+} 
+.email{
+    border-radius: 2px;
 }
+
+
 
 h2 {
     text-align: center;

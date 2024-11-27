@@ -30,7 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $reclamation = $_POST["reclamation"];
     $opcao = (int) $_POST["opcao"];
     $situacao = (int) $_POST["situacao"];
-    $usuario_nome = $_SESSION['usuario_nome'];
+    $anonimo = isset($_POST["anonimo"]) ? true : false;
+    $usuario_nome = $anonimo ? "Anônimo" : $_SESSION['usuario_nome'];
 
     $sql = "INSERT INTO dados (nome, reclamation, opcao, situacao) 
             VALUES ('$usuario_nome', '$reclamation', '$opcao', '$situacao')";

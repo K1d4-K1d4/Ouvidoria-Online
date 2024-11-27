@@ -9,12 +9,12 @@
 <body>
     <div class="container">
         <div class="login-box">
-            <h2>Cadastro!</h2>
+            <h2>Cadastre-se</h2>
             <form method="post" action="../scripts/registro.php">
-                <label for="Nome">Nome?</label>
+                <label for="Nome">Nome:</label>
                 <input type="text" id="name" name="name" required>
 
-                <label for="email">E-mail ou CPF:</label>
+                <label for="email">E-mail:</label>
                 <input type="text" id="email" name="email" required>
 
                 <label for="password">Senha:</label>
