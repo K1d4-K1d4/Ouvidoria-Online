@@ -161,6 +161,11 @@ if (mysqli_num_rows($tableExists) > 0) {
             </form>
         </div>
     </main>
+
+<footer>
+    <p>i know your secrets ng</p>
+</footer>
+
 </body>
 
 </html>

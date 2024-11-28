@@ -34,7 +34,7 @@ if (!$resultado) {
     <header>
         <nav>
             <a href="#" class="nav-logo">
-                <img src="https://fundacao193.org.br/wp-content/uploads/2023/05/ouvidoria.png" alt="Ouvidoria">
+                <img src="/Ouvidoria-Online/statics/ouvidoria.png" alt="Ouvidoria">
             </a>
             <div class="nav-links">
                 <a href="index.php">HOME</a>
@@ -49,7 +49,7 @@ if (!$resultado) {
             <h2>Reclamaçao Enviadas</h2>
             <?php if (mysqli_num_rows($resultado) > 0): ?>
                 <table>
-                    <thead>
+                    <thead class="table">
                         <tr>
                             <th>Reclamação</th>
                             <th>Opção</th>
@@ -64,9 +64,9 @@ if (!$resultado) {
                                     <?php
                                         switch ($row['opcao']) {
                                             case 1: echo 'Reclamação'; break;
-                                            case 2: echo 'Validação'; break;
-                                            case 3: echo 'Viadation'; break;
-                                            case 4: echo 'Graduação'; break;
+                                            case 2: echo 'Elogio'; break;
+                                            case 3: echo 'Sugestão'; break;
+                                            case 4: echo 'Denuncia'; break;
                                             default: echo 'Não especificado'; break;
                                         }
                                     ?>

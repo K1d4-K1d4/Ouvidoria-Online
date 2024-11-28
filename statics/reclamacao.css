@@ -27,8 +27,6 @@ nav a {
     border-radius: 2px;
 }
 
-
-
 h2 {
     text-align: center;
     margin-bottom: 20px;
@@ -60,4 +58,7 @@ td {
 p {
     text-align: center;
     color: #555;
+}
+.table{
+    background-color: #0A8282;
 }
